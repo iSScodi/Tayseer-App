@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tayseer__app/data/municipalities.dart';
 import 'package:tayseer__app/models/blog.dart';
+
 import 'package:tayseer__app/screens/addPost_screen.dart';
 import 'package:tayseer__app/widgets/filterPosts.dart';
 
@@ -25,7 +26,8 @@ class _MunicipalityDetailsScreenState extends State<MunicipalityDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    municipalityName = municipalitiesData[widget.id] ?? "municipality";
+   municipalityName = municipalitiesData[widget.id]?.name ?? "Municipality";
+
 
   }
   @override
@@ -44,7 +46,7 @@ class _MunicipalityDetailsScreenState extends State<MunicipalityDetailsScreen> {
               color: Colors.white,
             ),
           ),
-          backgroundColor: const Color.fromARGB(255, 118, 65, 192),
+          backgroundColor: const Color.fromARGB(255, 114, 82, 56),
           centerTitle: true,
           leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -75,11 +77,13 @@ class _MunicipalityDetailsScreenState extends State<MunicipalityDetailsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () async
+          //AddpostScreen(MunId: widget.id)
           {
            final newPost = await  
            Navigator.push(
            context,
-           MaterialPageRoute(builder: (context) => AddpostScreen(MunId: widget.id)));
+           MaterialPageRoute(builder: (context) => AddpostScreen(MunId: widget.id)),
+           );
 
            if (newPost != null) {
              setState(() {
@@ -87,7 +91,7 @@ class _MunicipalityDetailsScreenState extends State<MunicipalityDetailsScreen> {
              });
            }
          },//onPressed
-         backgroundColor: const Color.fromARGB(255, 118, 65, 192),
+         backgroundColor: const Color.fromARGB(255, 114, 82, 56),
          child: const Icon(Icons.add, color: Colors.white,),
        ),
       )

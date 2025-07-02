@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
           
           //image background 
         Image.asset(
-              'assets/images/welcome.jpg',
+              'assets/images/w.jpg',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
@@ -24,12 +24,12 @@ class WelcomeScreen extends StatelessWidget {
 
         //button get started
        Positioned(
-               bottom: 100, 
-               left: 130,
-               right: 130,
+               bottom: 304, 
+               left: 180,
+               right: 90,
                child: ElevatedButton(
                style: ElevatedButton.styleFrom(
-               backgroundColor: const Color.fromARGB(166, 241, 228, 255),
+               backgroundColor: const Color.fromARGB(166, 247, 184, 102),
                shape: RoundedRectangleBorder(
                borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -40,7 +40,10 @@ class WelcomeScreen extends StatelessWidget {
                    MaterialPageRoute(builder: (context) => Registerscreen()),
                      );
                },
-               child: Text("Get Started",),
+               child: Icon(Icons.arrow_forward,
+                 color: Colors.white,
+                 size: 30,
+               ),
               ), 
       ),  
 

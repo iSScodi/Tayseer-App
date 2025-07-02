@@ -1,35 +1,33 @@
-// register_screen.dart
+// login_screen.dart
 import 'package:flutter/material.dart';
-import 'package:tayseer__app/screens/login_screen.dart';
+import 'package:tayseer__app/screens/registerScreen.dart';
 import 'package:tayseer__app/screens/municipality_screen.dart';
 import 'package:tayseer__app/widgets/background.dart';
 import 'package:tayseer__app/widgets/textfieldCustom.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
 import 'dart:convert';
 
-class Registerscreen extends StatefulWidget {
-  const Registerscreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Registerscreen> createState() => _RegisterscreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterscreenState extends State<Registerscreen> {
-  final TextEditingController nameController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
 
-  Future<void> registerUser() async {
+  Future<void> loginUser() async {
     final email = emailController.text.trim();
-    final username = nameController.text.trim();
     final password = passwordController.text.trim();
 
-    if (email.isEmpty || username.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please fill all fields")),
+        SnackBar(content: Text("Please enter email and password")),
       );
       return;
     }
@@ -45,32 +43,29 @@ class _RegisterscreenState extends State<Registerscreen> {
 
     try {
       final response = await http.post(
-        Uri.parse("http://127.0.0.1:8000/register"),
+        Uri.parse("http://127.0.0.1:8000/login"),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "email": email,
-          "username": username,
-          "password": password,
-          "profile_picture": null,
-        }),
+        body: jsonEncode({"email": email, "password": password}),
       );
 
       setState(() => isLoading = false);
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final token = data["access_token"];
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Registration successful")),
+          SnackBar(content: Text("Login successful")),
         );
+       final username = data["username"] ?? "User"; 
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => MunicipalityScreen(name: username),
-          ),
-        );
+  context,
+  MaterialPageRoute(builder: (_) => MunicipalityScreen(name: username)),
+);
+
       } else {
         final error = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(error["detail"] ?? "Registration failed")),
+          SnackBar(content: Text(error["detail"] ?? "Login failed")),
         );
       }
     } catch (e) {
@@ -84,7 +79,7 @@ class _RegisterscreenState extends State<Registerscreen> {
   @override
   Widget build(BuildContext context) {
     return Background(
-      title: "Register",
+      title: "Login",
       child: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -97,11 +92,6 @@ class _RegisterscreenState extends State<Registerscreen> {
             ),
             child: Column(
               children: [
-                TextFieldCustom(
-                  nameController: nameController,
-                  hintText: "Enter your Username",
-                ),
-                SizedBox(height: 20),
                 TextFieldCustom(
                   nameController: emailController,
                   hintText: "Email",
@@ -116,17 +106,17 @@ class _RegisterscreenState extends State<Registerscreen> {
                 isLoading
                     ? CircularProgressIndicator()
                     : ElevatedButton(
-                        onPressed: registerUser,
-                        child: Text("Register",style: TextStyle(color: const Color.fromARGB(255, 160, 123, 74)),),
+                        onPressed: loginUser,
+                        child: Text("Login",style: TextStyle(color: const Color.fromARGB(255, 160, 123, 74)),),
                       ),
                 TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => LoginScreen()),
+                      MaterialPageRoute(builder: (_) => Registerscreen()),
                     );
                   },
-                  child: Text("Already have an account? Login", style: TextStyle(color: Colors.white)),
+                  child: Text("New here? Create an account", style: TextStyle(color: const Color.fromARGB(235, 255, 255, 255))),
                 ),
               ],
             ),

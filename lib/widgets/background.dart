@@ -15,7 +15,7 @@ class Background extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: Colors.white,
         )),
-        backgroundColor: const Color.fromARGB(255, 118, 65, 192),
+        backgroundColor: const Color.fromARGB(255, 114, 82, 56),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -26,14 +26,12 @@ class Background extends StatelessWidget {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 118, 65, 192),
-              Color.fromARGB(255, 118, 65, 192),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+         
+         image: DecorationImage(image: AssetImage("assets/images/background.jpg"),
+         fit: BoxFit.cover,
+         
+         
+         )
         ),
         child: Center(child: child),
       ),

@@ -23,7 +23,7 @@ class FilterPosts extends StatelessWidget {
             itemBuilder: (context, index) {
               final post = filteredBlogs[index];
                return Card(
-                color: const Color.fromARGB(255, 212, 184, 228),
+                color: const Color.fromARGB(234, 207, 186, 158),
                 
                 margin: const EdgeInsets.all(10),
                 child: Padding(

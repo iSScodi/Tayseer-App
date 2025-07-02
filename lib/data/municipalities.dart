@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tayseer__app/models/municipalityInfo.dart';
 enum Category {
   donations,
   services,
@@ -14,23 +15,16 @@ final Map<Category, IconData> categoryIcons = {
 };
 
 
-final Map<int, String> municipalitiesData = {
-  1: "Ghbayre Municipality",
-  2: "Kheyam Municipality",
-  3: "Houla Municipality",
-  4: "Kawneen Municipality",
-  5: "Bleeda Municipality",
-  6: "Arabsalim Municipality",
-  7: "MachGhara Municipality",
-  8: "Sohmor Municipality",
-  9: "Yoneen Municipality",
-  10: "Aytaroon Municipality",
-  11: "Taybi Municipality",
-  12: "Edaysi Municipality",
-  13: "Aynata Municipality",
-  14: "DeerAnoon Municipality",
-  15: "Bazoryi Municipality",
-  16: "Barasheet Municipality",
-  17: "Ayta Alshaeb Municipality",
-  18: "Betleef Municipality",
+final Map<int, MunicipalityInfo> municipalitiesData = {
+  1: MunicipalityInfo(name: "Ghbayre Municipality", imagePath: "assets/images/ghbayri.png"),
+  2: MunicipalityInfo(name: "Kheyam Municipality", imagePath: "assets/images/kheyam.png"),
+  3: MunicipalityInfo(name: "Houla Municipality", imagePath: "assets/images/houla.png"),
+  4: MunicipalityInfo(name: "Kawneen Municipality", imagePath: "assets/images/kawneen.png"),
+  5: MunicipalityInfo(name: "Arabsalim Municipality", imagePath: "assets/images/arabsalim.png"),
+  6: MunicipalityInfo(name: "Bleeda Municipality", imagePath: "assets/images/bleeda.png"),
+  7: MunicipalityInfo(name: "MayslJabal Municipality", imagePath: "assets/images/maysljabal.png"),
+  8: MunicipalityInfo(name: "Sohmor Municipality", imagePath: "assets/images/sohmor.png"),
+  9: MunicipalityInfo(name: "Ghazeyi Municipality", imagePath: "assets/images/ghazeyi.png"),
+  
+  
 };
